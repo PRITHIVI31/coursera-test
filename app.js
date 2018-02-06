@@ -1,24 +1,46 @@
-(function()
+angular.module('MsgApp',[])
+.controller('MsgController',MsgController).filter('custom',customFilterFactory).filter('truth',TruthFilter);
+function MsgController($scope,$filter,customFilter,truthFilter)
 {
-    'use strict';
-    angular.module('nameCalculator',[])
-    .controller('NameCalculatorController',function($scope)
-{
-$scope.name="";
-$scope.totalValue=0;
-$scope.displayNumeric=function()
-{
-    var totalNameValue=calculateValue($scope.name);
-    $scope.totalValue=totalNameValue;
+    $scope.name="prithivi";
+    $scope.totalCost=.45;
+    $scope.sayHello=function()
+    {  
+        var uppCase=$filter('uppercase')($scope.name);
+        return uppCase;
+    };
+
+    $scope.sayLoves= function()
+    {
+        var msg="likes Coimbatore";
+        msg=customFilter(msg);
+        return msg;
+
+    };
+    $scope.sayTruth=function()
+    {
+        var msg = "Healthy Snacks are tasty";
+        var target="Healthy";
+        var replace="Cookies";
+        var msg=truthFilter(msg,target,replace);
+        return msg;
+    };
 }
-function calculateValue(string)
+function customFilterFactory()
 {
-    var total=0;
-    for (let i = 0; i < string.length; i++) {
-          total+=string.charCodeAt(i);
-        }
-        return total;
+    return function(input)
+    {
+        input= input || "";
+        input= input.replace("likes","loves");
+        return input;
+    }
 }
-$scope.totalValue=calculateValue($scope.name);
-})
-})();
+function TruthFilter()
+{
+    return function (input,target,replace) {
+        input=input || "";
+        input=input.replace(target,replace);
+        return input;
+        
+    }
+}

@@ -7,13 +7,12 @@
 <style>body{font-size: 1.5em;}</style>
 <title>Name Calculator</title>
 </head>
-<body ng-app="nameCalculator">
+<body ng-app="MsgApp">
     <h1>Let's Calculate the values from your name</h1>
-<div ng-controller="NameCalculatorController">
+<div ng-controller="MsgController">
     <h3>Please Enter your Name:</h3>
-<input type="text" ng-model="name"
-ng-keyup="displayNumeric();"/> {{name}}
-<div>Total Numeric value of person's name is : {{totalValue}} </div>
+<input type="text" ng-model="name" /> {{sayHello();}}
+<div>Cost of : {{totalValue}} </div>
 </div>
 </body>
 </html>
